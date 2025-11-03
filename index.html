@@ -424,8 +424,14 @@
         </script>
 
        <div class="question">
-    <h2>Question 16: How many system calls must be performed by the following code? (Simple memory copy function without I/O)</h2>
-
+    <h2>Question 16: How many system calls must be performed by the following code?</h2>
+    <p> void copy(void *dest, const void *src, int len)
+        {
+            int i;
+            for (i = 0; i < len; i++)
+                memcpy(dest, src, 1);
+        }
+    </p>
     <form id="q16">
         <label><input type="radio" name="answer" value="a"> a. len</label>
         <label><input type="radio" name="answer" value="b"> b. len/2</label>

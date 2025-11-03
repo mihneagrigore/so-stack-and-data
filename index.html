@@ -423,28 +423,47 @@
             }
         </script>
 
-        <div class="question">
-            <h2>Question 16: How many system calls must be performed by the following code? (Simple memory copy function without I/O)</h2>
-            <form id="q16">
-                <label><input type="radio" name="answer" value="a"> a. len</label>
-                <label><input type="radio" name="answer" value="b"> b. len/2</label>
-                <label><input type="radio" name="answer" value="c"> c. 0</label>
-                <label><input type="radio" name="answer" value="d"> d. 1</label>
-                <button type="button" onclick="checkQ16()">Submit</button>
-            </form>
-            <div id="result16" class="result-box"></div>
-        </div>
+       <div class="question">
+    <h2>Question 16: How many system calls must be performed by the following code? (Simple memory copy function without I/O)</h2>
+
+    <form id="q16">
+        <label><input type="radio" name="answer" value="a"> a. len</label>
+        <label><input type="radio" name="answer" value="b"> b. len/2</label>
+        <label><input type="radio" name="answer" value="c"> c. 0</label>
+        <label><input type="radio" name="answer" value="d"> d. 1</label>
+        <button type="button" onclick="checkQ16()">Submit</button>
+    </form>
+
+    <div id="result16" class="result-box"></div>
+    </div>
+
         <script>
-            function checkQ16() {
-                var selected = document.querySelector('#q16 input[name="answer"]:checked');
-                var resultDiv = document.getElementById('result16');
-                if (selected && selected.value === 'c') {
-                    resultDiv.innerHTML = '<span class="result">Correct!</span><br><div class="explanation">Explanation: The code simply copies memory within the process memory and does not perform any privileged operations, so no system calls are required.</div>';
-                } else {
-                    resultDiv.innerHTML = '<span class="incorrect">Incorrect.</span> The correct answer is c.<br><div class="explanation">Explanation: The code simply copies memory within the process memory and does not perform any privileged operations, so no system calls are required.</div>';
-                }
+        function checkQ16() {
+            var selected = document.querySelector('#q16 input[name="answer"]:checked');
+            var resultDiv = document.getElementById('result16');
+        
+            const codeExample = `
+        <pre><code>void copy(void *dest, const void *src, int len) {
+            int i;
+            for (i = 0; i < len; i++)
+                memcpy(dest, src, 1);
+        }
+        </code></pre>`;
+        
+            if (selected && selected.value === 'c') {
+                resultDiv.innerHTML = 
+                    '<span class="result">Correct!</span><br>' +
+                    codeExample +
+                    '<div class="explanation">This code only copies memory within user space — no system calls occur.</div>';
+            } else {
+                resultDiv.innerHTML = 
+                    '<span class="incorrect">Incorrect.</span> The correct answer is c.<br>' +
+                    codeExample +
+                    '<div class="explanation">This code performs no I/O or kernel operations, so it uses 0 system calls.</div>';
             }
+        }
         </script>
+
 
         <div class="question">
             <h2>Question 17: The operating system's kernel does NOT:</h2>
